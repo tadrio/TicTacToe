@@ -31,6 +31,10 @@ body {
     outline: 0;
     margin-bottom: 20px;
     padding: 11px 0 13px 15px;
+    &:focus{
+      border: 1px solid $darkblue;
+      box-shadow: 0 0 5px #000000;
+    }
   }
 
   &__player2--config {
@@ -41,6 +45,10 @@ body {
     height: 48px;
     border-radius: 10px;
     margin-bottom: 40px;
+    &:focus-within{
+      border: 1px solid $darkblue;
+      box-shadow: 0 0 5px #000000;
+    }
   }
 
   &__input2 {
@@ -266,6 +274,7 @@ body {
       font-size: 130px;
       font-weight: 700;
       color: $grey;
+      cursor: pointer;
     }
   }
 }

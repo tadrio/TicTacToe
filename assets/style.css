@@ -102,6 +102,12 @@ body {
   padding: 11px 0 13px 15px;
 }
 
+.left-panel__input1:focus {
+  border: 1px solid #0097E6;
+  -webkit-box-shadow: 0 0 5px #000000;
+          box-shadow: 0 0 5px #000000;
+}
+
 .left-panel__player2--config {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -114,6 +120,12 @@ body {
   height: 48px;
   border-radius: 10px;
   margin-bottom: 40px;
+}
+
+.left-panel__player2--config:focus-within {
+  border: 1px solid #0097E6;
+  -webkit-box-shadow: 0 0 5px #000000;
+          box-shadow: 0 0 5px #000000;
 }
 
 .left-panel__input2 {
@@ -431,6 +443,7 @@ body {
   font-size: 130px;
   font-weight: 700;
   color: #828282;
+  cursor: pointer;
 }
 
 .right-panel {
