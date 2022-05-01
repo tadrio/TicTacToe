@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+$darkblue: #0097E6;
+$lightblue: #2BA9EA;
+$grey: #828282;
+$green: #45F391;
+$white: #FFFFFF;
+
+$font: 'Ubuntu';
+
+//use font sizes in px, but don't write the units so the fuction might calc the value in rem. 
+$font-size-14: 14; 
+$font-size-16: 16;
+$font-size-24: 24;
+$font-size-48: 48;
+$font-size-130: 130;

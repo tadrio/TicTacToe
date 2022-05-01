@@ -1,0 +1,331 @@
+@import "_variables.scss";
+@import "_reset.scss";
+@import "_mixin.scss";
+
+body {
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  background-color: $darkblue;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 387px;
+  padding: 50px 35px;
+  box-sizing: border-box;
+  background-color: $darkblue;
+  color: $white;
+  height: 100vh;
+
+  &__input1 {
+    width: 317px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: $font-size-16;
+    box-sizing: border-box;
+    border: none;
+    outline: 0;
+    margin-bottom: 20px;
+    padding: 11px 0 13px 15px;
+  }
+
+  &__player2--config {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    width: 317px;
+    height: 48px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+
+  &__input2 {
+    width: 252px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: $font-size-16;
+    box-sizing: border-box;
+    border: none;
+    outline: 0;
+    padding: 0;
+    padding: 11px 0 13px 15px;
+  }
+
+  &__bot-switcher-outline {
+    border-radius: 16px;
+    border: none;
+    background-color: $lightblue;
+    width: 56px;
+    height: 32px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__bot-switcher--ball {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: $white;
+    position: absolute;
+    left: 4px;
+  }
+
+  &__round-numbers-title {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    color: $green;
+    margin-bottom: 15px;
+  }
+
+  &__round-numbers-config {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+
+    &__rounds-switcher-outline {
+      border-radius: 16px;
+      border: solid 1px;
+      border-color: $white;
+      width: 56px;
+      height: 32px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    &__rounds-switcher-ball {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: $white;
+      position: absolute;
+      left: 4px;
+    }
+  }
+
+  &__button-start {
+    width: 100%;
+    height: 54px;
+    border-radius: 10px;
+    background-color: $green;
+    border: none;
+    color: $white;
+    font-size: 24px;
+    font-weight: 500;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 38px;
+    cursor: pointer;
+  }
+
+  &__history-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  &__history-box {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    gap: 20px;
+
+    &__history-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+
+      &--winner-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        background-color: $white;
+        width: 168px;
+        height: 50px;
+        border-radius: 10px;
+        padding: 10px 15px;
+        justify-content: space-between;
+        &--title {
+          color: $green;
+          font-weight: 700;
+        }
+        &--name {
+          color: $grey;
+        }
+      }
+      &--scenario {
+        width: 49px;
+        height: 49px;
+        gap: 2px;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 12px;
+
+        &--squares {
+          display: flex;
+          align-self: center;
+          justify-content: center;
+          width: 15px;
+          height: 15px;
+          border-radius: 2px;
+          background-color: $white;
+          color: $grey;
+          font-weight: 700;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &__restart-button {
+    width: 100%;
+    height: 54px;
+    border-radius: 10px;
+    background-color: $white;
+    border: none;
+    color: $darkblue;
+    font-size: 24px;
+    font-weight: 500;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+}
+
+.mid-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 36px;
+  background-color: $lightblue;
+  width: 100vw;
+
+  &__scoreboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    color: $darkblue;
+    background-color: $white;
+    width: 400px;
+    padding: 11px 30px 19px;
+    margin-bottom: 70px;
+
+    &__title{
+      font-size: 24px;
+      font-weight: 700;
+    }
+    &__scores{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &--player1{
+        font-size: 48px;
+        font-weight: 700;
+      }
+      &--player2{
+        font-size: 48px;
+        font-weight: 700;
+      }
+      &--winner{
+        font-size: 16px;
+        color: $grey;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__battlefield{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 510px;
+
+    &__square{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $white;
+      width: 160px;
+      height: 160px;
+      border-radius: 15px;
+      font-size: 130px;
+      font-weight: 700;
+      color: $grey;
+    }
+  }
+}
+
+.right-panel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 50px 35px;
+  box-sizing: border-box;
+  background-color: $darkblue;
+  font-size: 14px;
+  height: 100vh;
+  width: 387px;
+  
+  &__title{
+    color: $white;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+
+  &__history-box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &__history-wrapper{
+      display: flex;
+      align-items: center;
+      width: 317px;
+      height: 50px;
+      background-color: $white;
+      border-radius: 10px;
+      padding: 6px 10px 9px;
+      box-sizing: border-box;
+    }
+    &__history-wrapper--move-text{
+      color: $grey;
+      font-size: 48px;
+      font-weight: 700;
+      margin-right: 16px;
+    }
+    &__history-wrapper--info{
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      height: 100%;
+      justify-content: space-around;
+    }
+    &__history-wrapper--info-player{
+      color: $grey;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    &__history-wrapper--info-location{
+      color: $darkblue;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+}
