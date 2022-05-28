@@ -464,7 +464,6 @@ body {
   background-color: #0097E6;
   font-size: 14px;
   height: 100vh;
-  width: 387px;
 }
 
 .right-panel__title {
@@ -472,6 +471,7 @@ body {
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 26px;
+  width: 317px;
 }
 
 .right-panel__history-box {
@@ -506,6 +506,7 @@ body {
   font-size: 48px;
   font-weight: 700;
   margin-right: 16px;
+  width: 10%;
 }
 
 .right-panel__history-box__history-wrapper--info {
