@@ -1,101 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/style.css">
-  <script src="./index.js" defer></script>
-  <title>Tic Tac Toe</title>
-</head>
-<body>
-  <section class="left-panel">
-    <form class="left-panel__form">
-      <input class="left-panel__input1" type="text" placeholder="Jogador 1" value="Jogador 1">
-      <div class="left-panel__player2--config">
-        <input class="left-panel__input2" type="text" placeholder="Jogador 2" value="Jogador 2">
-        <div class="left-panel__bot-switcher-outline">
-          <div class="left-panel__bot-switcher--ball"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <script src="./index.js" defer></script>
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <section class="left-panel">
+      <form class="left-panel__form">
+        <input
+          class="left-panel__input1"
+          type="text"
+          placeholder="Jogador 1"
+          value="Jogador 1"
+        />
+        <div class="left-panel__player2--config">
+          <input
+            class="left-panel__input2"
+            type="text"
+            placeholder="Jogador 2"
+            value="Jogador 2"
+          />
+          <div class="left-panel__bot-switcher-outline">
+            <div class="left-panel__bot-switcher--ball"></div>
+          </div>
         </div>
-      </div>
-      <span class="left-panel__round-numbers-title">Tipo de Partida</span>
-      <div class="left-panel__round-numbers-config">
-        <span>Melhor de 3</span>
-        <div class="left-panel__round-numbers-config__rounds-switcher-outline">
-          <div class="left-panel__round-numbers-config__rounds-switcher-ball"></div>
+        <span class="left-panel__round-numbers-title">Tipo de Partida</span>
+        <div class="left-panel__round-numbers-config">
+          <span>Melhor de 3</span>
+          <div
+            class="left-panel__round-numbers-config__rounds-switcher-outline"
+          >
+            <div
+              class="left-panel__round-numbers-config__rounds-switcher-ball"
+            ></div>
+          </div>
+          <span>Melhor de 5</span>
         </div>
-        <span>Melhor de 5</span>
+      </form>
+      <button class="left-panel__button-start">Jogar</button>
+      <strong class="left-panel__history-title">Histórico de Partidas</strong>
+      <div class="left-panel__history-box">
+        <!-- aqui vai entrar o histórico de partidas -->
       </div>
+      <button class="left-panel__restart-button">Reiniciar</button>
+    </section>
 
-    </form>
-    <button class="left-panel__button-start">Jogar</button>
-    <strong class="left-panel__history-title">Histórico de Partidas</strong>
-    <div class="left-panel__history-box">
-      <div class="left-panel__history-box__history-wrapper">
-        <div class="left-panel__history-box__history-wrapper--winner-wrapper">
-          <strong class="left-panel__history-box__history-wrapper--winner-wrapper--title">Vencedor</strong>
-          <span class="left-panel__history-box__history-wrapper--winner-wrapper--name">Jogador 1</span>
-        </div>
-        <span class="left-panel__history-box__history-wrapper--text">Cenário</span>
-        <div class="left-panel__history-box__history-wrapper--scenario">
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
+    <section class="mid-panel">
+      <div class="mid-panel__scoreboard">
+        <span class="mid-panel__scoreboard__title">Placar</span>
+        <div class="mid-panel__scoreboard__scores">
+          <span class="mid-panel__scoreboard__scores--player1">00</span>
+          <span class="mid-panel__scoreboard__scores--winner"></span>
+          <span class="mid-panel__scoreboard__scores--player2">00</span>
         </div>
       </div>
-      <div class="left-panel__history-box__history-wrapper">
-        <div class="left-panel__history-box__history-wrapper--winner-wrapper">
-          <strong class="left-panel__history-box__history-wrapper--winner-wrapper--title">Vencedor</strong>
-          <span class="left-panel__history-box__history-wrapper--winner-wrapper--name">Jogador 1</span>
-        </div>
-        <span class="left-panel__history-box__history-wrapper--text">Cenário</span>
-        <div class="left-panel__history-box__history-wrapper--scenario">
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">X</div>
-          <div class="left-panel__history-box__history-wrapper--scenario--squares">O</div>
-        </div>
+      <div class="mid-panel__battlefield">
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
+        <div class="mid-panel__battlefield__square"></div>
       </div>
-    </div>
-    <button class="left-panel__restart-button">Reiniciar</button>
-  </section>
+      <div class="winner-bestof"></div>
+    </section>
 
-  <section class="mid-panel">
-    <div class="mid-panel__scoreboard">
-      <span class="mid-panel__scoreboard__title">Placar</span>
-      <div class="mid-panel__scoreboard__scores">
-        <span class="mid-panel__scoreboard__scores--player1">00</span>
-        <span class="mid-panel__scoreboard__scores--winner"></span>
-        <span class="mid-panel__scoreboard__scores--player2">00</span>
+    <section class="right-panel">
+      <span class="right-panel__title">Histórico de Jogadas</span>
+      <div class="right-panel__history-box">
+        <!-- aqui vai entrar o histórico de jogadas da partida atual -->
       </div>
-    </div>
-    <div class="mid-panel__battlefield">
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-      <div class="mid-panel__battlefield__square"></div>
-    </div>
-  </section>
-
-  <section class="right-panel">
-    <span class="right-panel__title">Histórico de Jogadas</span>
-    <div class="right-panel__history-box"></div>
-  </section>
-</body>
+    </section>
+  </body>
 </html>

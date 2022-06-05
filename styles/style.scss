@@ -83,6 +83,13 @@ body {
     background-color: $white;
     position: absolute;
     left: 4px;
+    transition: 200ms;
+
+    &.active{
+      transform:translateX(24px);
+      background-color: $green;
+      transition: 200ms;
+    }
   }
 
   &__round-numbers-title {
@@ -119,6 +126,12 @@ body {
       background-color: $white;
       position: absolute;
       left: 4px;
+      transition: 200ms;
+
+      &.active{
+        transform:translateX(22px);
+        transition: 200ms;
+      }
     }
   }
 
