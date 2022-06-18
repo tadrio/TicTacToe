@@ -38,6 +38,7 @@ const winCondition = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+let moveScenery = [];
 
 let playerMove = "X";
 let currentPlayer = $player1Name.value;
@@ -50,12 +51,17 @@ let botActive = false;
 let player2Name = "";
 let bestOf = 3;
 
-function toggleBestOf() {
+const addMoveScenery = () => {
+  const scenery = getScenery();
+  moveScenery.push(scenery);
+};
+
+const toggleBestOf = () => {
   bestOf = bestOf === 3 ? 5 : 3;
 }
 
-function verifyBestOf() {
-  let gameWinner = '';
+const verifyBestOf = () => {
+  let gameWinner = "";
   let minMatches = Math.round(bestOf / 2);
 
   if (scoreP1 >= minMatches || scoreP2 >= minMatches) {
@@ -65,17 +71,7 @@ function verifyBestOf() {
   }
 }
 
-function printGameWinner(gameWinner) {
-  $winnerbestof.innerHTML = `
-  <br>
-  <span class="mid-panel__scoreboard__title">
-  ${gameWinner} venceu a melhor de ${bestOf}
-  </span>`;
-  setTimeout(resetGame, 1000);
-
-};
-
-function resetGame(){
+const resetGame = () => {
   scoreP1 = 0;
   scoreP2 = 0;
   resetScoreBoard();
@@ -83,13 +79,18 @@ function resetGame(){
   resetMoveHistory();
   resetGameHistory();
   resetGameWinner();
+  resetMoveScenery();
 }
 
-function resetGameWinner(){
+const resetMoveScenery = () =>{
+  moveScenery = [];
+}
+
+const resetGameWinner = () => {
   $winnerbestof.innerHTML = ``;
 }
 
-function bot() {
+const bot = () => {
   if (
     verifyMatch() === "X" ||
     verifyMatch() === "O" ||
@@ -105,7 +106,7 @@ function bot() {
   move(index, "bot");
 }
 
-function move(field, playerType) {
+const move = (field, playerType) => {
   const fieldItem = $board[field];
 
   if (!canPlay && playerType === "player") return;
@@ -124,6 +125,7 @@ function move(field, playerType) {
     printWinnerName(gameResult);
     printGameHistory(winnerName, scenery);
     setTimeout(resetMoveHistory, 1000);
+    setTimeout(resetMoveScenery,1000);
   }
 
   if (gameResult === "draw") {
@@ -133,12 +135,14 @@ function move(field, playerType) {
     printWinnerName(gameResult);
     printGameHistory(winnerName, scenery);
     setTimeout(resetMoveHistory, 1000);
+    setTimeout(resetMoveScenery,1000);
   }
 
   printMoveHistory(playerMove, currentPlayer, field);
   toggleMove();
   printScore();
   verifyBestOf();
+  addMoveScenery();
   if (playerType === "player" && botActive) {
     setTimeout((canPlay = false));
     setTimeout(bot, 250);
@@ -148,7 +152,7 @@ function move(field, playerType) {
   }
 }
 
-function toggleMove() {
+const toggleMove = () => {
   if (playerMove === "X") {
     playerMove = "O";
     currentPlayer = $player2Name.value;
@@ -158,12 +162,21 @@ function toggleMove() {
   }
 }
 
-function printScore() {
+const printGameWinner = (gameWinner) => {
+  $winnerbestof.innerHTML = `
+  <br>
+  <span class="mid-panel__scoreboard__title">
+  ${gameWinner} venceu a melhor de ${bestOf}
+  </span>`;
+  setTimeout(resetGame, 1000);
+}
+
+const printScore = () => {
   $scoreP1.textContent = scoreP1 < 10 ? "0" + scoreP1 : scoreP1;
   $scoreP2.textContent = scoreP2 < 10 ? "0" + scoreP2 : scoreP2;
 }
 
-function printWinnerName(winner) {
+const printWinnerName = (winner) => {
   if (winner === "X") {
     winnerName = $player1Name.value;
     $winnerName.textContent = `${winnerName} venceu!`;
@@ -176,7 +189,7 @@ function printWinnerName(winner) {
   }
 }
 
-function printMoveHistory(move, player, field) {
+const printMoveHistory = (move, player, field) => {
   const dictionaryIndex = [
     "Linha 1 | Coluna 1",
     "Linha 1 | Coluna 2",
@@ -189,17 +202,75 @@ function printMoveHistory(move, player, field) {
     "Linha 3 | Coluna 3",
   ];
 
-  $moveHistory.innerHTML += `
-  <div class="right-panel__history-box__history-wrapper">
-      <p class="right-panel__history-box__history-wrapper--move-text">${move}</p>
-    <div class="right-panel__history-box__history-wrapper--info">
-      <p class="right-panel__history-box__history-wrapper--info-player">${player}</p>
-      <p class="right-panel__history-box__history-wrapper--info-location">${dictionaryIndex[field]}</p>
-    </div>
-  </div>`;
+  const $moveText = document.createElement('p');
+  $moveText.classList.add('right-panel__history-box__history-wrapper--move-text');
+  $moveText.textContent = move;
+  const $infoWrapper = document.createElement('div');
+  $infoWrapper.classList.add('right-panel__history-box__history-wrapper--info');
+  const $infoPlayer = document.createElement('p');
+  $infoPlayer.classList.add('right-panel__history-box__history-wrapper--info-player');
+  $infoPlayer.textContent = player;
+  const $infoLocation = document.createElement('p');
+  $infoLocation.classList.add('right-panel__history-box__history-wrapper--info-location');
+  $infoLocation.textContent = dictionaryIndex[field];
+  $infoWrapper.appendChild($infoPlayer);
+  $infoWrapper.appendChild($infoLocation);
+  const $historyWrapper = document.createElement('div');
+  $historyWrapper.classList.add('right-panel__history-box__history-wrapper');
+  $historyWrapper.appendChild($moveText);
+  $historyWrapper.appendChild($infoWrapper);
+
+  $moveHistory.appendChild($historyWrapper);
+
+  const $moveHistoryItems = document.querySelectorAll(
+    ".right-panel__history-box__history-wrapper"
+  );
+
+  for (let i = 0; i < $moveHistoryItems.length; i++) {
+    $moveItem = $moveHistoryItems[i];
+    $moveItem.addEventListener("click", () => {
+      const currentScenery = moveScenery[i];
+      printBoardByScenery(currentScenery);
+    });
+  }
 }
 
-function getScenery() {
+const printGameHistory = (winner, scenery) => {
+  const $gameHistoryWrapper = document.createElement('div');
+  $gameHistoryWrapper.classList.add('left-panel__history-box__history-wrapper');
+  const $winnerWrapper = document.createElement('div');
+  $winnerWrapper.classList.add('left-panel__history-box__history-wrapper--winner-wrapper');
+  const $winnerTitle = document.createElement('strong');
+  $winnerTitle.classList.add('left-panel__history-box__history-wrapper--winner-wrapper--title');
+  $winnerTitle.textContent = 'Vencedor';
+  $winnerWrapper.appendChild($winnerTitle);
+  const $winnerName = document.createElement('span');
+  $winnerName.classList.add('left-panel__history-box__history-wrapper--winner-wrapper--name');
+  $winnerName.textContent = winner;
+  $winnerWrapper.appendChild($winnerName);
+  const $sceneryTitle = document.createElement('span');
+  $sceneryTitle.classList.add('left-panel__history-box__history-wrapper--text');
+  $sceneryTitle.textContent = 'Cenário';
+  const $sceneryWrapper = document.createElement('div');
+  $sceneryWrapper.classList.add('left-panel__history-box__history-wrapper--scenario');
+  for (const move of scenery) {
+    const $sceneryElement = document.createElement('div');
+    $sceneryElement.classList.add('left-panel__history-box__history-wrapper--scenario--squares');
+    $sceneryElement.textContent = move;
+    $sceneryWrapper.appendChild($sceneryElement);
+  }
+  $gameHistoryWrapper.appendChild($winnerWrapper);
+  $gameHistoryWrapper.appendChild($sceneryWrapper);
+  $gameHistory.appendChild($gameHistoryWrapper);
+}
+
+const printBoardByScenery = (scenery) => {
+  for (let i = 0; i < scenery.length; i++) {
+    $board[i].textContent = scenery[i];
+  }
+};
+
+const getScenery = () => {
   const scenery = [];
   for (const $field of $board) {
     scenery.push($field.textContent);
@@ -207,32 +278,12 @@ function getScenery() {
   return scenery;
 }
 
-function printGameHistory(winner, scenery) {
-  let miniBoard = "";
-  for (const move of scenery) {
-    miniBoard += `<div class="left-panel__history-box__history-wrapper--scenario--squares">${move}</div>`;
-  }
-
-  $gameHistory.innerHTML += `
-  <div class="left-panel__history-box__history-wrapper">
-    <div class="left-panel__history-box__history-wrapper--winner-wrapper">
-      <strong class="left-panel__history-box__history-wrapper--winner-wrapper--title">Vencedor</strong>
-      <span class="left-panel__history-box__history-wrapper--winner-wrapper--name">
-      ${winner}</span>
-    </div>
-    <span class="left-panel__history-box__history-wrapper--text">Cenário</span>
-    <div class="left-panel__history-box__history-wrapper--scenario">
-    ${miniBoard}
-    </div>
-  </div>`;
-}
-
-function addPoint(winner) {
+const addPoint = (winner) => {
   if (winner === "X") scoreP1++;
   if (winner === "O") scoreP2++;
 }
 
-function verifyMatch() {
+const verifyMatch = () => {
   let filledFields = 0;
 
   for (const condition of winCondition) {
@@ -256,7 +307,7 @@ function verifyMatch() {
   if (filledFields === 9) return "draw";
 }
 
-function resetBoard() {
+const resetBoard = () => {
   for (let i = 0; i < $board.length; i++) {
     $board[i].textContent = "";
   }
@@ -264,20 +315,20 @@ function resetBoard() {
   canPlay = true;
 }
 
-function resetScoreBoard() {
+const resetScoreBoard = () => {
   $scoreP1.textContent = "00";
   $scoreP2.textContent = "00";
 }
 
-function resetMoveHistory() {
+const resetMoveHistory = () => {
   $moveHistory.innerHTML = "";
 }
 
-function resetGameHistory() {
+const resetGameHistory = () => {
   $gameHistory.innerHTML = "";
 }
 
-$playButton.addEventListener("click", function () {
+$playButton.addEventListener("click", () => {
   if (!canPlay) {
     canPlay = true;
     $playButton.innerHTML = "Pausar";
@@ -288,17 +339,17 @@ $playButton.addEventListener("click", function () {
   $playButton.classList.toggle = "button-paused";
 });
 
-$resetButton.addEventListener("click", function () {
+$resetButton.addEventListener("click", () => {
   resetGame();
 });
 
-$board.forEach(function ($field, field) {
-  $field.addEventListener("click", function () {
+$board.forEach(($field, field) => {
+  $field.addEventListener("click", () => {
     move(field, "player");
   });
 });
 
-$botSwitchBorder.addEventListener("click", function () {
+$botSwitchBorder.addEventListener("click", () => {
   $botSwitchBall.classList.toggle("active");
   botActive = !botActive;
   if ($player2Name.value === "BOT") {
@@ -310,7 +361,7 @@ $botSwitchBorder.addEventListener("click", function () {
   $player2Name.disabled = !$player2Name.disabled;
 });
 
-$roundsSwitchBorder.addEventListener("click", function () {
+$roundsSwitchBorder.addEventListener("click", () => {
   $roundsSwitchBall.classList.toggle("active");
   toggleBestOf();
 });
